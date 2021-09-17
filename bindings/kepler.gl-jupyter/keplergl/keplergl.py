@@ -171,10 +171,11 @@ class KeplerGl(widgets.DOMWidget):
         cmd = """window.__keplerglDataConfig = {};""".format(keplergl_data)
         frame_txt = keplergl_html[:k] + "<body><script>" + cmd + "</script>" + keplergl_html[k+6:]
 
-        if "google.colab" in sys.modules:
-            from IPython.display import HTML, Javascript 
-            display(HTML(frame_txt))
-            display(Javascript(f"google.colab.output.setIframeHeight('{self.height}');"))
+        # if "google.colab" in sys.modules:
+        # FORCE USE display method in MW
+        from IPython.display import HTML, Javascript 
+        display(HTML(frame_txt))
+        # display(Javascript(f"google.colab.output.setIframeHeight('{self.height}');"))
 
     def _repr_html_(self, data=None, config=None, read_only=False, center_map=False):
         ''' Return current map in an html encoded string
